@@ -27,6 +27,6 @@
     "mathlive": "^0.32.1"
   },
   "devDependencies": {
-    "http-server": "^0.11.1"
+    "http-server": "^0.12.0"
   }
 }
