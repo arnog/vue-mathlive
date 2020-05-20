@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/arnog/vue-mathlive#readme",
   "dependencies": {
-    "mathlive": "latest"
+    "mathlive": "^0.51.0"
   },
   "devDependencies": {
     "http-server": "^0.12.3"
