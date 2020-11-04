@@ -12,6 +12,12 @@ Next, the wrapper should be imported, then the two connected using `Vue.use()`
 
 Note: this repository only contains the sample. The Vue wrapper is packaged with the main MathLive library.
 
+**Caution**: If you are getting runtime errors when instantiating 
+a mathfield component and a warning in the console from Vue about "You are
+using the runtime-only build of Vue..." make sure to add `runtimeCompiler: true`
+to your Vue configuration.
+
+
 ```html
 <script type="module">
   import MathLive from "https://unpkg.com/mathlive/dist/mathlive.min.mjs";
