@@ -8,11 +8,11 @@
 <body>
   <script type="module">
     import Vue from "https://cdn.jsdelivr.net/npm/vue/dist/vue.esm.browser.js";
-    import MathLive from "https://unpkg.com/mathlive/dist/mathlive.min.mjs";
-    import Mathfield from "https://unpkg.com/mathlive/dist/vue-mathlive.mjs";
+    import * as MathLive from "https://unpkg.com/mathlive/dist/mathlive.mjs";
+    import MathfieldComponent from "https://unpkg.com/mathlive/dist/vue-mathlive.mjs";
     Vue.config.devtools = true;
 
-    Vue.use(Mathfield, MathLive);
+    Vue.use(MathfieldComponent, MathLive);
     // The default tag for mathfields is <mathlive-mathfield>
     // A custom tag can be defined using:
     // ```Vue.component("custom-tag", Mathfield);```
@@ -39,7 +39,7 @@
         },
         asSpokenText: function () {
           return this.$refs.mathfield
-            ? this.$refs.mathfield.text("spoken")
+            ? this.$refs.mathfield.getValue("spoken")
             : "";
         },
       },
