@@ -38,12 +38,12 @@ The component supports the `v-model` attribute.
 
 The textual content of the element is used as the initial value of the editor.
 
-The mathfield can be configured using the `:config` attribute, for example to
+The mathfield can be configured using the `:options` attribute, for example to
 specify the location of the fonts directory. Read more about the [available options](http://cortexjs.io/docs/mathlive/?q=MathfieldConfig).
 
 ```html
 <mathlive-mathfield
-  :config="{smartFence:false}"
+  :options="{smartFence:false}"
   @focus="ping"
   :on-keystroke="displayKeystroke"
   v-model="formula"
@@ -57,7 +57,7 @@ specify the location of the fonts directory. Read more about the [available opti
 | Name          | Type                                      | Description                                                                                                                                                                                                                                                                                                                            |
 | ------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `value`       | `string`                                  | The content of the matfield, represented as a LaTeX string.                                                                                                                                                                                                                                                                            |
-| `config`      | `object`                                  | Configuration options for the mathfield. See [documentation](http://cortexjs.io/docs/mathlive/?q=MathfieldConfig)                                                                                                                                                                                                                      |
+| `options`      | `object`                                  | Configuration options for the mathfield. See [documentation](http://cortexjs.io/docs/mathlive/?q=MathfieldConfig)                                                                                                                                                                                                                      |
 | `onKeystroke` | `(keystroke:string, ev:Event) => boolean` | A callback invoked when a key is pressed. `keystroke` is a string describing the keystroke, `ev` is the native keyboard event. Return false to stop handling of the event                                                                                                                                                              |
 | `onMoveOutOf` | `(string) => boolean`                     | A callback invoked when keyboard navigation would cause the insertion point to leave the mathfield. The argument indicates the direction of the navigation, either "forward" or "backward". Return false to prevent the move, true to wrap around to the start of the field. By default, the insertion point will wrap around.         |
 | `onTabOutOf`  | `(string) => boolean`                     | A callback invoked when pressing tab (or shift-tab) would cause the insertion point to leave the mathfield. The argument indicates the direction of the navigation, either "forward" or "backward". Return false to prevent the move, true to wrap around to the start of the field. By default, the insertion point will wrap around. |
