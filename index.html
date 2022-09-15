@@ -1,60 +1,74 @@
 <!DOCTYPE html>
 <html lang="en-US">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <title>MathLive with Vue.js</title>
+  </head>
 
-<head>
-  <link rel="stylesheet" href="style.css" />
-</head>
+  <body>
+    <script type="module">
+      import Vue from "https://cdn.jsdelivr.net/npm/vue/dist/vue.esm.browser.js";
+      import * as MathLive from "https://unpkg.com/mathlive/dist/mathlive.mjs";
+      import MathfieldComponent from "https://unpkg.com/mathlive/dist/vue-mathlive.mjs";
+      Vue.config.devtools = true;
 
-<body>
-  <script type="module">
-    import Vue from "https://cdn.jsdelivr.net/npm/vue/dist/vue.esm.browser.js";
-    import * as MathLive from "https://unpkg.com/mathlive/dist/mathlive.mjs";
-    import MathfieldComponent from "https://unpkg.com/mathlive/dist/vue-mathlive.mjs";
-    Vue.config.devtools = true;
+      Vue.use(MathfieldComponent, MathLive);
+      // The default tag for mathfields is <mathlive-mathfield>
+      // A custom tag can be defined using:
+      // ```Vue.component("custom-tag", Mathfield);```
 
-    Vue.use(MathfieldComponent, MathLive);
-    // The default tag for mathfields is <mathlive-mathfield>
-    // A custom tag can be defined using:
-    // ```Vue.component("custom-tag", Mathfield);```
+      new Vue({
+        el: "main",
+        data: {
+          formula: "",
+          keystroke: "",
+        },
+        methods: {
+          sayIt: (event) => {
+            this.$refs.mathfield.executeCommand(["speak", "all"]);
+          },
+          setIt: (event) => {
+            this.formula = "x=-b\\pm \\frac {\\sqrt{b^2-4ac}}{2a}";
+          },
+          ping: () => {
+            console.log("ping");
+          },
+          displayKeystroke: (keystroke, _ev) => {
+            this.keystroke = keystroke;
+            return true;
+          },
+          asSpokenText: function () {
+            return this.$refs.mathfield
+              ? this.$refs.mathfield.getValue("spoken")
+              : "";
+          },
+        },
+        mounted,
+      });
 
-    new Vue({
-      el: "main",
-      data: {
-        formula: "",
-        keystroke: "",
-      },
-      methods: {
-        sayIt: function (event) {
-          this.$refs.mathfield.perform(["speak", "all"]);
-        },
-        setIt: function (event) {
-          this.formula = "x=-b\\pm \\frac {\\sqrt{b^2-4ac}}{2a}";
-        },
-        ping: function () {
-          console.log("ping");
-        },
-        displayKeystroke: function (keystroke, _ev) {
-          this.keystroke = keystroke;
-          return true;
-        },
-        asSpokenText: function () {
-          return this.$refs.mathfield
-            ? this.$refs.mathfield.getValue("spoken")
-            : "";
-        },
-      },
-    });
-  </script>
-  <main>
-    <h2>MathLive with Vue.js</h2>
-    <mathlive-mathfield id="mf" ref="mathfield" :options="{smartFence:false, virtualKeyboardMode:'onfocus'}" @focus="ping"
-      :on-keystroke="displayKeystroke" v-model="formula">f(x)=</mathlive-mathfield>
-    <div><label>Keystroke:&nbsp;</label><span>{{keystroke}}</span></div>
-    <div class="output">LaTeX: {{formula}}</div>
-    <div class="output">Spoken text: {{asSpokenText()}}</div>
-    <button v-on:click="sayIt">Say It</button>
-    <button v-on:click="setIt">Set It</button>
-  </main>
-</body>
+      async function mounted() {
+        this.$mathlive.renderMathInElement(this.$refs["static-math"]);
+      }
+    </script>
+    <main>
+      <h2>MathLive with Vue.js</h2>
 
+      <mathlive-mathfield
+        id="mf"
+        ref="mathfield"
+        :options="{smartFence:false, virtualKeyboardMode:'onfocus'}"
+        @focus="ping"
+        :on-keystroke="displayKeystroke"
+        v-model="formula"
+        >f(x)=</mathlive-mathfield
+      >
+      <div><label>Keystroke:&nbsp;</label><span>{{keystroke}}</span></div>
+      <div class="output">LaTeX: {{formula}}</div>
+      <div class="output">Spoken text: {{asSpokenText()}}</div>
+      <button v-on:click="sayIt">Say It</button>
+      <button v-on:click="setIt">Set It</button>
+
+      <div ref="static-math">\[x^2 = x*x\]</div>
+    </main>
+  </body>
 </html>
