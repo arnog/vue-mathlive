@@ -1,5 +1,9 @@
 ![Screencast](screencast.gif)
 
+Note: this repository only contains the sample. The Vue wrapper is packaged with the main
+[MathLive library](https://github.com/arnog/mathlive/blob/master/src/vue-mathlive.js) and
+is presently compatible solely with Vue 2.
+
 The MathLive Vue wrapper provides a Vue component that implements a
 `<mathlive-mathfield>` HTML tag.
 
@@ -14,8 +18,6 @@ specific version of the library to be used by the wrapper.
 
 Next, the wrapper should be imported, then the two connected using `Vue.use()`
 
-Note: this repository only contains the sample. The Vue wrapper is packaged with the main MathLive library.
-
 **Caution**: If you are getting runtime errors when instantiating
 a mathfield component and a warning in the console from Vue about "You are
 using the runtime-only build of Vue..." make sure to add `runtimeCompiler: true`
@@ -23,8 +25,8 @@ to your Vue configuration.
 
 ```html
 <script type="module">
-  import * as MathLive from "https://unpkg.com/mathlive/dist/mathlive.min.mjs";
-  import VueMathfield from "https://unpkg.com/mathlive/dist/vue-mathlive.mjs";
+  import * as MathLive from "https://unpkg.com/mathlive@0.98.4/dist/mathlive.min.mjs";
+  import VueMathfield from "https://unpkg.com/mathlive@0.98.4/dist/vue-mathlive.mjs";
 
   Vue.use(VueMathfield, MathLive);
 </script>
